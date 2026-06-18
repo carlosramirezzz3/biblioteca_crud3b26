@@ -2,15 +2,16 @@ from database.conexion import Conexion
 from models.libro import Libro
  
 class LibroDAO:
+    #selec asterisco
     def obtener_todo(self):
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
 
-        cursor.execute("SELEC * FROM libro")
+        cursor.execute("SELECT * FROM libro")
         registros = cursor.fetchall()
 
         libros = []
-        for registro in registro :
+        for registro in registros :
             libro = Libro(
                 id = registro[0],
                 titulo= registro[1],
@@ -22,6 +23,7 @@ class LibroDAO:
         cursor.close()
         conexion.close()
         return libros
+    #insert
     def insertar(self,libro):    
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
@@ -41,5 +43,38 @@ class LibroDAO:
         conexion.commit()
         cursor.close()
         conexion.close()
+
+    def actualizar(self,libro):
+          conexion = Conexion.obtener_conexion()
+          cursor = conexion.cursor()
+
+          sql= """
+          UPDATE libro
+          SET titulo = %s, autor =%s, isbn=%s, disponible=%s
+          WHERE id=%s
+          """
+          cursor.execute(sql, (
+            libro.titulo,
+            libro.autor,
+            libro.isbn,
+            libro.disponible,
+            libro.id,
+        ))
+          conexion.commit()
+          cursor.close()
+          conexion.close()
+          
+        
+          
+    def eliminar(self,id):
+         conexion = Conexion.obtener_conexion()
+         cursor = conexion.cursor()
+
+         cursor.execute("DELETE FROM libro WHERE id =%s",(id))
+
+         conexion.commit()
+         cursor.close()
+         conexion.close()
+         
         
  
