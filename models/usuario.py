@@ -8,11 +8,12 @@ class Usuario:
         self.correo = correo
         self.activo = activo
 
-    def activar(self):
-        self.activo = False
+    def estatus(self):
+        self.activo = True
 
-    def desactivar(self):
+    def estatus(self):
         self.activo = False
 
     def mostrar_info(self):
+        self.activo = "activo" if self.activo else "baja"
         return f"ID: {self.id}, Nombre: {self.nombre}, Matricula: {self.matricula}, Carrera: {self.carrera}, Activo: {self.activo}"            

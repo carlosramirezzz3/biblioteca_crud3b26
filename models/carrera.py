@@ -7,4 +7,5 @@ class Carrera:
 
     def mostrar_info(self):
         return f"ID Carrera:  {self.id_carrera}, Nombre Carrera: {self.nombre_carrera}"
+    
         
